@@ -1,0 +1,22 @@
+{% extends 'MailingSetting/base.html' %}
+{% block content %}
+<div class="col-12">
+</div>
+{% for object in object_list %}
+<div class="col-4">
+    <div class="card ">
+        <h3 class="card-header text-center">
+            {{object.full_name}}
+        </h3>
+        <div class="card-body text-center">
+            Email:
+            {{object.email }}
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center  align-items-center"></div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}

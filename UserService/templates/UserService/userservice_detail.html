@@ -1,0 +1,28 @@
+{% extends 'MailingSetting/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Информация
+                    </h3>
+                    <h6>Текущий пользователь: {{ request.user }}</h6>
+                </div>
+                <div class="card-body">
+                    <h6>Email:
+                        {{object.email}}</h6>
+                    <h6>ФИО:
+                        {{object.full_name}}</h6>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'UserService:user_list' %}"
+                       class="btn btn-sm btn-secondary">Вернуться</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'MailingSetting/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <h4 class="card-header text-center">
+                    {{ object.title }}
+                </h4>
+                <div class="card-body text-left">
+                    {{ object.content }}
+                    <li>количество просмотров: {{ object.number_of_views }}</li>
+                    <li>дата публикации: {{ object.date_of_publication }}</li>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <a href="{% url 'Blog:blog_list' %}"
+                           class="btn btn-sm btn-secondary mr-1">Вернуться </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

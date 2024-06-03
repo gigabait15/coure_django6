@@ -1,0 +1,37 @@
+{% extends 'MailingSetting/base.html' %}
+{% block content %}
+<div class="col-12">
+    {% if user.is_authenticated %}
+        <a class="btn btn-success" href="{% url 'MailingSetting:message_create' %}" style="margin-bottom: 30px;">
+            Создать новое сообщение</a>
+    {% endif %}
+</div>
+{% for object in object_list %}
+<div class="col-4">
+    <div class="card ">
+        <h3 class="card-header text-center">
+            {{object.letter_subject}}
+        </h3>
+        <div class="card-body text-center">
+            {{object.letter_body|slice:":100"|safe }}
+            {% if object.letter_body|length > 100 %}...{% endif %}
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center  align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'MailingSetting:message_detail' object.pk %}"
+                       class="btn btn-sm btn-secondary mr-1">Информация</a>
+                    {% if object.client == request.user %}
+                    <a href="{% url 'MailingSetting:message_update' object.pk %}"
+                       class="btn btn-sm btn-secondary mr-1">Изменить</a>
+                    <a href="{% url 'MailingSetting:message_delete' object.pk %}"
+                       class="btn btn-sm btn-secondary mr-1">Удалить</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}

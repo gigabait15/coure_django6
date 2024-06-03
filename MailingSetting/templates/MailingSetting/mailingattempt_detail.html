@@ -1,0 +1,31 @@
+{% extends 'MailingSetting/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <h4 class="card-header">
+                    Журнал логов планировщика
+                </h4>
+                <div class="card-body text-left">
+                    <h2>Детали попытки рассылки с ID: {{ object.id }}</h2>
+                    <h3>Журнал логов:</h3>
+                    <div class="log-content">
+                        {% for log in log_content %}
+                        <p>{{ log }}</p>
+                        {% empty %}
+                        <p>Логи для этой рассылки отсутствуют.</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a href="{% url 'MailingSetting:attempt' %}"
+                               class="btn btn-sm btn-secondary mr-1">Вернуться в логи</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

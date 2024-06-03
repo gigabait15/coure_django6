@@ -1,0 +1,11 @@
+[
+    {
+        "name": "managers",
+        "permissions": [
+            "can_change_mailingsetting_status",
+            "can_view_mailingsetting",
+            "can_change_serviceclient_is_active",
+            "can_view_serviceclient"
+        ]
+    }
+]

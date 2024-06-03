@@ -1,0 +1,32 @@
+{% extends 'MailingSetting/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for object in object_list %}
+        <div class="col-6">
+            <div class="card">
+                <h4 class="card-header">
+                    Логи по рассылкам
+                </h4>
+                <div class="card-body text-left">
+                    <ul>
+                        <li>ID рассылки: {{ object.mailingsetting.id }}</li>
+                        <li>Дата и время последней попытки: {{ object.last_attempt_datatime }}</li>
+                        <li>Ответ почтового сервера:</li>
+                        {{ object.mail_server_response }}
+                        <li>Статус попытки: {{ object.attempt_status }}</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center align-items-center">
+                          <a href="{% url 'MailingSetting:logs_scheduler' object.pk %}"
+                       class="btn btn-sm btn-secondary mr-1">Открыть журнал планировщика</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

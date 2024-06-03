@@ -1,0 +1,56 @@
+<!-- -*- coding: utf-8 -*- -->
+{% extends 'MailingSetting/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <h4 class="card-header text-center">
+                    Информация о рассылках
+                </h4>
+                <div class="card-body">
+                    <ul>
+                        <li>Общее количество рассылок: {{ total_mailings_count }}</li>
+                        {% if active_mailings_count > 0 %}
+                        <li>Количество активных рассылок: {{ active_mailings_count }}</li>
+                        Количество уникальных клиентов для рассылок:
+                        {% for mailing in unique_clients_per_mailing %}
+                        <li>Рассылка "{{ mailing.message.letter_subject }}":
+                            {{ mailing.number_of_unique_clients }}
+                        </li>
+                        {% endfor %}
+                        {% else %}
+                        <li>Активных рассылок нет</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for object in object_list %}
+        <div class="col-4  mb-4">
+            <div class="card">
+                <h4 class="card-header text-center">
+                    {{ object.title }}
+                </h4>
+                <div class="card-body text-center">
+                    {% if object.image %}
+                    <img src="{{ blog.image.url }}" class="img-fluid" alt="Изображение блога">
+                    {% else %}
+                    <p>Нет изображения</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <a href="{% url 'Blog:blog_detail' object.pk %}"
+                           class="btn btn-sm btn-secondary mr-1">Просмотр</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
