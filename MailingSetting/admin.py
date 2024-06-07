@@ -6,19 +6,26 @@ from MailingSetting.models import MailingSetting, MessageMailing, MailingAttempt
 class MailingSettingAdminSuperUserForm(forms.ModelForm):
     class Meta:
         model = MailingSetting
-        fields = '__all__'
+        fields = "__all__"
+
 
 class MailingSettingAdminManagerForm(forms.ModelForm):
     class Meta:
         model = MailingSetting
-        fields = ['status']
+        fields = ["status"]
+
 
 @admin.register(MailingSetting)
 class MailingSettingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_send_datetime', 'periodicity', 'status',)
-    list_filter = ('status',)
-    search_fields = ('message__letter_subject',)
-    filter_horizontal = ('client',)
+    list_display = (
+        "id",
+        "first_send_datetime",
+        "periodicity",
+        "status",
+    )
+    list_filter = ("status",)
+    search_fields = ("message__letter_subject",)
+    filter_horizontal = ("client",)
 
     def get_form(self, request, obj=None, **kwargs):
         if request.user.is_superuser:
@@ -29,10 +36,15 @@ class MailingSettingAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return []
         else:
-            return ['id', 'first_send_datetime', 'periodicity']
+            return ["id", "first_send_datetime", "periodicity"]
+
 
 class MailingAttemptAdmin(admin.ModelAdmin):
-    list_display = ('id', 'last_attempt_datatime', 'attempt_status',)
+    list_display = (
+        "id",
+        "last_attempt_datatime",
+        "attempt_status",
+    )
 
 
 admin.site.register(MessageMailing)

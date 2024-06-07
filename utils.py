@@ -1,5 +1,6 @@
 import logging
 
+
 class CustomFilter(logging.Filter):
     def filter(self, record):
         message = record.getMessage()

@@ -10,29 +10,43 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('MailingSetting', '0001_initial'),
+        ("MailingSetting", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mailingsetting',
-            name='client',
-            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name='Клиент сервиса'),
+            model_name="mailingsetting",
+            name="client",
+            field=models.ManyToManyField(
+                to=settings.AUTH_USER_MODEL, verbose_name="Клиент сервиса"
+            ),
         ),
         migrations.AddField(
-            model_name='mailingattempt',
-            name='mailingsetting',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='MailingSetting.mailingsetting', verbose_name='настройка рассылки'),
+            model_name="mailingattempt",
+            name="mailingsetting",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="MailingSetting.mailingsetting",
+                verbose_name="настройка рассылки",
+            ),
         ),
         migrations.AddField(
-            model_name='messagemailing',
-            name='client',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Клиент сервиса'),
+            model_name="messagemailing",
+            name="client",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Клиент сервиса",
+            ),
         ),
         migrations.AddField(
-            model_name='mailingsetting',
-            name='message',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='MailingSetting.messagemailing', verbose_name='Сообщение рассылки'),
+            model_name="mailingsetting",
+            name="message",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="MailingSetting.messagemailing",
+                verbose_name="Сообщение рассылки",
+            ),
         ),
     ]

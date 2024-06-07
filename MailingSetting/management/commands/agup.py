@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import get_user_model
 
+
 class Command(BaseCommand):
     """Добавление пользователя в группу с соответствующими разрешениями"""
 
@@ -12,10 +13,12 @@ class Command(BaseCommand):
         try:
             user = User.objects.get(email=user_email)
         except User.DoesNotExist:
-            self.stdout.write(self.style.ERROR(f"Пользователь с email {user_email} не найден"))
+            self.stdout.write(
+                self.style.ERROR(f"Пользователь с email {user_email} не найден")
+            )
             return
 
-        name = 'managers'
+        name = "managers"
         # Получаем или создаем группу managers
         managers_group, created = Group.objects.get_or_create(name=name)
 
@@ -28,14 +31,14 @@ class Command(BaseCommand):
 
         # Разрешения
         permissions = [
-            'can_view_serviceclient',
-            'view_serviceclient',
-            'change_serviceclient',
-            'can_change_is_active_serviceclient',
-            'can_view_mailingsetting',
-            'view_mailingsetting',
-            'change_mailingsetting',
-            'can_change_status_mailingsetting'
+            "can_view_serviceclient",
+            "view_serviceclient",
+            "change_serviceclient",
+            "can_change_is_active_serviceclient",
+            "can_view_mailingsetting",
+            "view_mailingsetting",
+            "change_mailingsetting",
+            "can_change_status_mailingsetting",
         ]
 
         for perm in permissions:
@@ -45,5 +48,9 @@ class Command(BaseCommand):
             except Permission.DoesNotExist:
                 self.stdout.write(self.style.ERROR(f"Разрешение {perm} не найдено"))
 
-        self.stdout.write(self.style.SUCCESS(f"Пользователь {user_email} "
-                                             f"добавлен в группу {name} с необходимыми разрешениями"))
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Пользователь {user_email} "
+                f"добавлен в группу {name} с необходимыми разрешениями"
+            )
+        )

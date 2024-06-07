@@ -8,6 +8,6 @@ app_name = BlogConfig.name
 
 
 urlpatterns = [
-    path('blog_list/', cache_page(60)(BlogListView.as_view()), name='blog_list'),
-    path('blog_detail/<int:pk>/', BlogDetailView.as_view(), name='blog_detail'),
+    path("blog_list/", cache_page(60)(BlogListView.as_view()), name="blog_list"),
+    path("blog_detail/<int:pk>/", BlogDetailView.as_view(), name="blog_detail"),
 ]
